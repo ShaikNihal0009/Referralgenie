@@ -10,6 +10,11 @@ function toggleAuth(option) {
         slider.style.left = "50%";
         buttons[0].classList.remove("active");
         buttons[1].classList.add("active");
+
+        // Check if Job Seeker is selected before opening signup page
+        if (document.querySelector('.toggle-btn.active').innerText === "Job Seeker") {
+            window.location.href = "signup.html";
+        }
     }
 }
 
@@ -26,12 +31,4 @@ function toggleRole(option) {
         buttons[2].classList.remove("active");
         buttons[3].classList.add("active");
     }
-}
-
-function showSection(sectionId) {
-    document.getElementById("about").classList.add("hidden");
-    document.getElementById("offer").classList.add("hidden");
-    document.getElementById("contact").classList.add("hidden");
-
-    document.getElementById(sectionId).classList.remove("hidden");
 }
