@@ -20,6 +20,12 @@ header h1 {
     color: white;
 }
 
+header h3 {
+    font-size: 28px;
+    background: linear-gradient(to right, #6d5dfc, #ba68c8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 nav ul {
     list-style: none;
     display: flex;
@@ -47,7 +53,9 @@ nav ul li a {
 
 .hero p {
     font-size: 20px;
-    color: #ba68c8;
+    background: linear-gradient(to right, #6d5dfc, #ba68c8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .cta-button {
