@@ -20,7 +20,7 @@ header h1 {
     color: white;
 }
 
-header h3 {
+header h2 {
     font-size: 28px;
     background: linear-gradient(to right, #6d5dfc, #ba68c8);
     -webkit-background-clip: text;
