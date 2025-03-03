@@ -1,0 +1,136 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to right, #6d5dfc, #ba68c8);
+    padding: 15px 20px;
+}
+
+header h1 {
+    font-size: 28px;
+    color: white;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.hero {
+    padding: 50px 20px;
+}
+
+.hero h2 {
+    font-size: 40px;
+    color: #4a90e2;
+}
+
+.hero p {
+    font-size: 20px;
+    color: #ba68c8;
+}
+
+.cta-button {
+    background: linear-gradient(to right, #6d5dfc, #ba68c8);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cta-button:hover {
+    background: linear-gradient(to right, #5a4ce6, #9c52a7);
+}
+
+/* Toggle Switch */
+.toggle-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.toggle {
+    display: flex;
+    position: relative;
+    background: white;
+    width: 250px;
+    height: 50px;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+}
+
+.toggle .slider {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, #6d5dfc, #ba68c8);
+    border-radius: 25px;
+    transition: 0.3s;
+    left: 0;
+}
+
+.toggle-btn {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+    color: black;
+}
+
+.toggle-btn.active {
+    color: white;
+}
+
+/* Sponsors */
+.sponsors {
+    margin: 50px 0;
+}
+
+.sponsor-logos {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.sponsor-logos img {
+    width: 100px;
+    height: auto;
+}
+
+/* Hidden Sections */
+.hidden {
+    display: none;
+}
+
+footer {
+    background: linear-gradient(to right, #6d5dfc, #ba68c8);
+    padding: 20px;
+    margin-top: 50px;
+    color: white;
+}
