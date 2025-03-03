@@ -1,34 +1,40 @@
-function toggleAuth(option) {
-    let slider = document.querySelectorAll('.toggle .slider')[0];
-    let buttons = document.querySelectorAll('.toggle-btn');
+document.addEventListener("DOMContentLoaded", function () {
+    const loginBtn = document.getElementById("loginBtn");
+    const signupBtn = document.getElementById("signupBtn");
+    const seekerBtn = document.getElementById("seekerBtn");
+    const providerBtn = document.getElementById("providerBtn");
 
-    if (option === 'login') {
-        slider.style.left = "0";
-        buttons[0].classList.add("active");
-        buttons[1].classList.remove("active");
-    } else {
-        slider.style.left = "50%";
-        buttons[0].classList.remove("active");
-        buttons[1].classList.add("active");
+    let loginActive = true;
+    let seekerActive = true;
 
-        // Check if Job Seeker is selected before opening signup page
-        if (document.querySelector('.toggle-btn.active').innerText === "Job Seeker") {
-            window.location.href = "signup.html";
+    // Toggle between Login and Signup
+    loginBtn.addEventListener("click", function () {
+        document.querySelector(".toggle .slider").style.left = "0px";
+        loginActive = true;
+    });
+
+    signupBtn.addEventListener("click", function () {
+        document.querySelector(".toggle .slider").style.left = "50%";
+        loginActive = false;
+        if (seekerActive) {
+            window.location.href = "signup.html"; 
         }
-    }
-}
+    });
 
-function toggleRole(option) {
-    let slider = document.querySelectorAll('.toggle .slider')[1];
-    let buttons = document.querySelectorAll('.toggle-btn');
+    // Toggle between Job Seeker and Job Provider
+    seekerBtn.addEventListener("click", function () {
+        document.querySelector(".role-toggle .slider").style.left = "0px";
+        seekerActive = true;
+    });
 
-    if (option === 'seeker') {
-        slider.style.left = "0";
-        buttons[2].classList.add("active");
-        buttons[3].classList.remove("active");
-    } else {
-        slider.style.left = "50%";
-        buttons[2].classList.remove("active");
-        buttons[3].classList.add("active");
-    }
-}
+    providerBtn.addEventListener("click", function () {
+        document.querySelector(".role-toggle .slider").style.left = "50%";
+        seekerActive = false;
+    });
+
+    // Show Sections on Click
+    window.showSection = function (section) {
+        document.querySelectorAll(".hidden").forEach(sec => sec.style.display = "none");
+        document.getElementById(section).style.display = "block";
+    };
+});
