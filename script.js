@@ -13,7 +13,7 @@ function toggleAuth(option) {
 
         // Redirect to signup if job seeker is selected
         if (document.getElementById("seekerBtn").classList.contains("active")) {
-            window.location.href = "signup.html";
+            window.location.href = "job_seeker_signup.html";
         }
     }
 }
