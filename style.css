@@ -48,7 +48,10 @@ nav ul li a {
 
 .hero h2 {
     font-size: 40px;
-    color: #4a90e2;
+    background: linear-gradient(to right, #6d5dfc, #ba68c8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 }
 
 .hero p {
