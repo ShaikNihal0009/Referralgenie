@@ -5,36 +5,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Seeker Registration</title>
     <link rel="stylesheet" href="style.css">
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Seeker Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color:black;
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+           
+        }
+        .header {
+            width: 100%;
+            background: linear-gradient(to right, #6d5dfc, #ba68c8);
+            color: white;
+            text-align: left;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border: 1px solid #ccc;
+            margin-top: 80px;
+        }
+        .form-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin: 15px 0;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: linear-gradient(to right, #6d5dfc, #ba68c8); 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: linear-gradient(to right, #7a1fd5, #3a00c0);
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h3>ReferralGenie - Job Seeker Registration</h3>
-    </header>
 
-    <section class="registration">
-        <h2>Register as a Job Seeker</h2>
-        <form id="jobSeekerForm">
+<div class="header">ReferralGenie - Job Seeker Registration</div>
+
+<div class="container">
+    <div class="form-title">Register as a Job Seeker</div>
+    <form>
+        <div class="form-group">
             <label for="name">Full Name:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" placeholder="Enter your full name" required>
+        </div>
 
+        <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" placeholder="Enter your email" required>
+        </div>
 
+        <div class="form-group">
             <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" required>
+            <input type="tel" id="phone" placeholder="Enter your phone number" required>
+        </div>
 
+        <div class="form-group">
             <label for="resume">Upload Resume:</label>
-            <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+            <input type="file" id="resume" required>
+        </div>
 
-            <button type="submit" class="cta-button">Submit</button>
-        </form>
-    </section>
+        <button type="submit" class="cta-button">Submit</button>
+    </form>
+</div>
+<script>
+    document.getElementById("jobSeekerForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        alert("Registration successful! We will contact you soon.");
+    });
+</script>
 
-    <script>
-        document.getElementById("jobSeekerForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            alert("Registration successful! We will contact you soon.");
-        });
-    </script>
 </body>
 </html>
