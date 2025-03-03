@@ -10,6 +10,11 @@ function toggleAuth(option) {
         slider.style.left = "50%";
         buttons[0].classList.remove("active");
         buttons[1].classList.add("active");
+
+        // Redirect to signup if job seeker is selected
+        if (document.getElementById("seekerBtn").classList.contains("active")) {
+            window.location.href = "signup.html";
+        }
     }
 }
 
