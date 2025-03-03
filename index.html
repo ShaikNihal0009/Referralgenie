@@ -3,47 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Referral Website</title>
+    <title>ReferralGenie</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h3>ReferralGenie</h3>
+        <h1>ReferralGenie</h1>
         <nav>
             <ul>
-                <li><a href="#" onclick="showSection('about')">About Us</a></li>
-                <li><a href="#" onclick="showSection('offer')">What We Offer</a></li>
-                <li><a href="#" onclick="showSection('contact')">Contact Us</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">What We Offer</a></li>
+                <li><a href="#">Contact Us</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="hero">
-        <h2>Unlock Career Opportunities with ReferralsGenietest</h2>
+        <h2>Unlock Career Opportunities</h2>
         <p>Refer & Get Hired</p>
         <button class="cta-button">Get Started</button>
     </section>
 
+    <!-- Login & Signup Toggle -->
     <section class="auth-section">
         <h2>Join ReferralGenie</h2>
         <div class="toggle-container">
             <div class="toggle">
+                <span id="loginText">Login</span>
+                <span id="signupText">Signup</span>
                 <div class="slider"></div>
-                <button class="toggle-btn active" onclick="toggleAuth('login')">Login</button>
-                <button class="toggle-btn" onclick="toggleAuth('register')">Signup</button>
             </div>
         </div>
 
         <h2>Select Your Role</h2>
         <div class="toggle-container">
-            <div class="toggle">
+            <div class="role-toggle">
+                <span id="jobSeekerText">Job Seeker</span>
+                <span id="jobProviderText">Job Provider</span>
                 <div class="slider"></div>
-                <button class="toggle-btn active" onclick="toggleRole('seeker')">Job Seeker</button>
-                <button class="toggle-btn" onclick="toggleRole('provider')">Job Provider</button>
             </div>
         </div>
+
+        <button class="toggle-btn" id="signupBtn">Signup</button>
     </section>
 
+    <!-- Sponsors -->
     <section class="sponsors">
         <h3>Our Sponsors</h3>
         <div class="sponsor-logos">
@@ -51,21 +55,6 @@
             <img src="sponsor2.png" alt="Sponsor 2">
             <img src="sponsor3.png" alt="Sponsor 3">
         </div>
-    </section>
-
-    <section id="about" class="hidden">
-        <h3>About Us</h3>
-        <p>Details about ReferralGenie...</p>
-    </section>
-
-    <section id="offer" class="hidden">
-        <h3>What We Offer</h3>
-        <p>Our unique services...</p>
-    </section>
-
-    <section id="contact" class="hidden">
-        <h3>Contact Us</h3>
-        <p>Email: contact@referralgenie.com</p>
     </section>
 
     <footer>
