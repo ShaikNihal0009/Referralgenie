@@ -1,53 +1,102 @@
-.signup-container {
-    width: 100%;
-    max-width: 400px;
-    margin: 50px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0;
     text-align: center;
 }
 
-.signup-container h2 {
+header {
     background: linear-gradient(to right, #6d5dfc, #ba68c8);
-    -webkit-background-clip: text;
-    color: transparent;
-    font-size: 24px;
-    margin-bottom: 20px;
+    padding: 15px 20px;
 }
 
-.signup-container label {
-    display: block;
-    font-weight: bold;
-    margin-top: 10px;
-    color: black;
+header h1 {
+    font-size: 28px;
+    color: white;
 }
 
-.signup-container input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #6d5dfc;
-    border-radius: 5px;
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
-.signup-container input[type="file"] {
-    border: none;
+nav ul li {
+    display: inline;
 }
 
-.signup-container button {
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.hero {
+    padding: 50px 20px;
+}
+
+.hero h2 {
+    font-size: 40px;
+    color: #4a90e2;
+}
+
+.hero p {
+    font-size: 20px;
+    color: #ba68c8;
+}
+
+.cta-button {
     background: linear-gradient(to right, #6d5dfc, #ba68c8);
     color: white;
     border: none;
-    padding: 15px;
-    width: 100%;
+    padding: 15px 30px;
     font-size: 18px;
     cursor: pointer;
     border-radius: 5px;
-    margin-top: 15px;
 }
 
-.signup-container button:hover {
-    background: linear-gradient(to right, #5a4ce6, #9c52a7);
+.auth-container {
+    margin-top: 20px;
+}
+
+.toggle,
+.role-toggle {
+    display: flex;
+    position: relative;
+    width: 250px;
+    margin: 10px auto;
+    background: white;
+    border-radius: 25px;
+    border: 2px solid blue;
+    overflow: hidden;
+}
+
+.toggle-btn {
+    width: 50%;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: black;
+}
+
+.toggle .slider,
+.role-toggle .slider {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, #6d5dfc, #ba68c8);
+    transition: 0.3s;
+}
+
+.sponsors {
+    margin: 50px 0;
+}
+
+.hidden {
+    display: none;
 }
