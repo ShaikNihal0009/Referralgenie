@@ -24,27 +24,7 @@
         <button class="cta-button">Get Started</button>
     </section>
 
-    <section class="auth-section">
-        <h2>Join ReferralGenie</h2>
-        <div class="toggle-container">
-            <div class="toggle">
-                <div class="slider"></div>
-                <button class="toggle-btn active" onclick="toggleAuth('login')">Login</button>
-                <button class="toggle-btn" id="signupBtn" onclick="toggleAuth('register')">Signup</button>
-            </div>
-        </div>
-
-        <h2>Select Your Role</h2>
-        <div class="toggle-container">
-            <div class="toggle">
-                <div class="slider"></div>
-                <button class="toggle-btn active" id="seekerBtn" onclick="toggleRole('seeker')">Job Seeker</button>
-                <button class="toggle-btn" onclick="toggleRole('provider')">Job Provider</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- New Opportunity Boxes Section -->
+    <!-- New Opportunity Boxes Section (Moved here right after the hero section) -->
     <section class="opportunity-boxes">
         <div class="box job-seeker">
             <h4>Job Seeker</h4>
@@ -62,6 +42,26 @@
                 <li>Complete referrals</li>
                 <li>Earn rewards</li>
             </ol>
+        </div>
+    </section>
+
+    <section class="auth-section">
+        <h2>Join ReferralGenie</h2>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="slider"></div>
+                <button class="toggle-btn active" onclick="toggleAuth('login')">Login</button>
+                <button class="toggle-btn" id="signupBtn" onclick="toggleAuth('register')">Signup</button>
+            </div>
+        </div>
+
+        <h2>Select Your Role</h2>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="slider"></div>
+                <button class="toggle-btn active" id="seekerBtn" onclick="toggleRole('seeker')">Job Seeker</button>
+                <button class="toggle-btn" onclick="toggleRole('provider')">Job Provider</button>
+            </div>
         </div>
     </section>
 
