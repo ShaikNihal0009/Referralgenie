@@ -125,12 +125,19 @@ li {
 }
 
 /* Arrow Icons Before Each Item */
-li::before {
+/* Add arrows only for opportunity box list items */
+.opportunity-boxes li::before {
     content: "➜"; /* Unicode arrow */
     color: #a970ff; /* Purple color */
     font-size: 20px;
     margin-right: 10px;
 }
+
+/* Remove arrows from navigation links */
+nav ul li::before {
+    content: none;
+}
+
 
 /* Toggle Container */
 .toggle-container {
