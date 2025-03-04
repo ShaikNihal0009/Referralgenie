@@ -97,6 +97,7 @@ nav ul li a {
     color: white;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease-in-out;
+    position: relative;
 }
 
 .box:hover {
@@ -123,11 +124,24 @@ nav ul li a {
 }
 
 .job-seeker {
-    border-color: linear-gradient(to right, #6d5dfc, #ba68c8);
+    /* Gradient border using ::before pseudo-element */
 }
 
 .job-provider {
-    border-color: linear-gradient(to right, #6d5dfc, #ba68c8);
+    /* Gradient border using ::before pseudo-element */
+}
+
+/* Add the gradient border effect */
+.box::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(to right, #6d5dfc, #ba68c8);
+    border-radius: 8px;
+    z-index: -1;
 }
 
 /* Toggle Switch */
@@ -197,6 +211,6 @@ nav ul li a {
 footer {
     background: linear-gradient(to right, #6d5dfc, #ba68c8);
     padding: 20px;
-    margin-top: 50px;  
+    margin-top: 50px;
     color: white;
 }
