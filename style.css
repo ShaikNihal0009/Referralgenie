@@ -89,15 +89,14 @@ nav ul li a {
 }
 
 .box {
-    background-color: transparent;
-    border: 2px solid transparent;
+    background-color: black; /* Background is black */
+    border: 2px solid transparent; /* Border is initially transparent */
     border-radius: 8px;
     padding: 20px;
     width: 45%; /* Adjust to fit two boxes side by side */
     color: white;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease-in-out;
-    position: relative;
 }
 
 .box:hover {
@@ -123,25 +122,13 @@ nav ul li a {
     font-size: 16px;
 }
 
+/* Specific Styling for Job Seeker & Job Provider Boxes */
 .job-seeker {
-    /* Gradient border using ::before pseudo-element */
+    border-color: linear-gradient(to right, #6d5dfc, #ba68c8);
 }
 
 .job-provider {
-    /* Gradient border using ::before pseudo-element */
-}
-
-/* Add the gradient border effect */
-.box::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(to right, #6d5dfc, #ba68c8);
-    border-radius: 8px;
-    z-index: -1;
+    border-color: linear-gradient(to right, #6d5dfc, #ba68c8);
 }
 
 /* Toggle Switch */
@@ -211,6 +198,6 @@ nav ul li a {
 footer {
     background: linear-gradient(to right, #6d5dfc, #ba68c8);
     padding: 20px;
-    margin-top: 50px;
+    margin-top: 50px;  
     color: white;
 }
