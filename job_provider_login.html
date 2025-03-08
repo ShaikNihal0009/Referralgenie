@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
     <title>Job Seeker Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: black;
-            color: black;
+            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -28,20 +29,26 @@
             top: 0;
             left: 0;
         }
+animation-container {
+            margin-bottom: -50px; /* Move animation up */
+        }
         .container {
-            background: white;
+            background: black;
             padding: 20px;
             border-radius: 10px;
             width: 400px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
             text-align: center;
-            border: 1px solid #ccc;
-            margin-top: 80px;
+            border: 1px solid #6d5dfc;
+            margin-top: 30px;
         }
         .form-title {
             font-size: 20px;
             font-weight: bold;
             margin-bottom: 20px;
+            background: linear-gradient(to right, #6d5dfc, #ba68c8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .form-group {
             display: flex;
@@ -52,12 +59,20 @@
         label {
             font-weight: bold;
             margin-bottom: 5px;
+            background: linear-gradient(to right, #6d5dfc, #ba68c8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         input {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #6d5dfc;
             border-radius: 5px;
+            background: black;
+            color: white;
+        }
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
         }
         button {
             width: 100%;
@@ -78,7 +93,7 @@
 <body>
 
 <div class="header">ReferralGenie - Job Provider Login</div>
-
+<dotlottie-player src="https://lottie.host/12c588bb-3fd2-4f07-baf9-1b46a0d69b8d/loSczvlfjd.lottie" background="transparent" speed="1" style="width: 120px; height: 120px; " loop autoplay></dotlottie-player>
 <div class="container">
     <div class="form-title">Login as a Job Provider</div>
     <form id="jobProviderLoginForm">
