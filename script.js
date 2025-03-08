@@ -1,42 +1,55 @@
-function toggleAuth(option) {
-    let slider = document.querySelectorAll('.toggle .slider')[0];
-    let buttons = document.querySelectorAll('.toggle-btn');
+document.addEventListener("DOMContentLoaded", function () {
+    let selectedRole = "seeker"; // Default: Job Seeker
+    let selectedAuth = "login";  // Default: Login
 
-    if (option === 'login') {
-        slider.style.left = "0";
-        buttons[0].classList.add("active");
-        buttons[1].classList.remove("active");
-    } else {
-        slider.style.left = "50%";
-        buttons[0].classList.remove("active");
-        buttons[1].classList.add("active");
+    function updateToggleUI() {
+        // Update Job Role Toggle
+        document.getElementById("seekerBtn").classList.toggle("active", selectedRole === "seeker");
+        document.getElementById("providerBtn").classList.toggle("active", selectedRole === "provider");
 
-        // Redirect to signup if job seeker is selected
-        if (document.getElementById("seekerBtn").classList.contains("active")) {
-            window.location.href = "job_seeker_signup.html";
+        // Update Login-Signup Toggle
+        document.querySelector('.toggle-btn[onclick="toggleAuth(\'login\')"]').classList.toggle("active", selectedAuth === "login");
+        document.querySelector('.toggle-btn[onclick="toggleAuth(\'register\')"]').classList.toggle("active", selectedAuth === "register");
+
+        // Move Slider Effect (Fix)
+        const roleSlider = document.querySelector("#roleSlider");
+        const authSlider = document.querySelector("#authSlider");
+
+        if (selectedRole === "seeker") {
+            roleSlider.style.transform = "translateX(0%)";
+        } else {
+            roleSlider.style.transform = "translateX(100%)";
+        }
+
+        if (selectedAuth === "login") {
+            authSlider.style.transform = "translateX(0%)";
+        } else {
+            authSlider.style.transform = "translateX(100%)";
         }
     }
-}
 
-function toggleRole(option) {
-    let slider = document.querySelectorAll('.toggle .slider')[1];
-    let buttons = document.querySelectorAll('.toggle-btn');
-
-    if (option === 'seeker') {
-        slider.style.left = "0";
-        buttons[2].classList.add("active");
-        buttons[3].classList.remove("active");
-    } else {
-        slider.style.left = "50%";
-        buttons[2].classList.remove("active");
-        buttons[3].classList.add("active");
+    function updateForm() {
+        if (selectedRole === "seeker" && selectedAuth === "login") {
+            window.location.href = "job_seeker_login.html";
+        } else if (selectedRole === "seeker" && selectedAuth === "register") {
+            window.location.href = "job_seeker_signup.html";
+        } else if (selectedRole === "provider" && selectedAuth === "login") {
+            window.location.href = "job_provider_login.html";
+        } else if (selectedRole === "provider" && selectedAuth === "register") {
+            window.location.href = "job_provider_signup.html";
+        }
     }
-}
 
-function showSection(sectionId) {
-    document.getElementById("about").classList.add("hidden");
-    document.getElementById("offer").classList.add("hidden");
-    document.getElementById("contact").classList.add("hidden");
+    window.toggleRole = function (role) {
+        selectedRole = role;
+        updateToggleUI();
+    };
 
-    document.getElementById(sectionId).classList.remove("hidden");
-}
+    window.toggleAuth = function (authType) {
+        selectedAuth = authType;
+        updateToggleUI();
+        updateForm();
+    };
+
+    updateToggleUI();
+});
