@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Profile Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .dashboard {
+            width: 20%;
+            height: 100vh;
+            background: linear-gradient(to right, #6d5dfc, #ba68c8);
+            color: white;
+            padding: 20px;
+            position: fixed;
+        }
+        .container {
+            width: 70%;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .edit-icon {
+            cursor: pointer;
+            font-size: 20px;
+            color: #6d5dfc;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        .hidden {
+            display: none;
+        }
+        .save-btn {
+            background: #6d5dfc;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            float: right;
+        }
+        @media (max-width: 768px) {
+            .dashboard {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .container {
+                width: 90%;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <h2>Dashboard</h2>
+        <p>Profile</p>
+        <p>Send a referral request</p>
+        <p>Applications Status</p>
+        <p>Chat</p>
+        <p>Contact or Support</p>
+    </div>
+    <div class="container" style="margin-left: 22%;">
+        <div class="header">
+            <h2>John Doe</h2>
+            <span class="edit-icon" onclick="enableEdit()">✏</span>
+        </div>
+        <p><strong>Email:</strong> johndoe@email.com</p>
+        <p><strong>Phone:</strong> (91) 9045697890</p>
+        <p><strong>Resume:</strong> <input type="file"></p>
+
+        <!-- Radio buttons with vertical alignment -->
+        <p><strong>Job Category:</strong></p>
+        <label>
+            <input type="radio" name="job_category" id="fresher" onclick="showDetails('fresherDetails')"> Fresher
+        </label><br>
+        <label>
+            <input type="radio" name="job_category" id="internship" onclick="showDetails('internshipDetails')"> Internship Experience
+        </label><br>
+        <label>
+            <input type="radio" name="job_category" id="experienced" onclick="showDetails('experiencedDetails')"> Experienced
+        </label><br>
+        
+        <!-- Fresher Details -->
+        <div id="fresherDetails" style="display:none;">
+            <input type="text" placeholder="College Name">
+            <input type="text" placeholder="PIN Code">
+            <input type="text" placeholder="Skills">
+            <br/>
+            <select>
+                <option value="">state</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                <option value="Assam">Assam</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Chhattisgarh">Chhattisgarh</option>
+                <option value="Goa">Goa</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Haryana">Haryana</option>
+                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                <option value="Jharkhand">Jharkhand</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Manipur">Manipur</option>
+                <option value="Meghalaya">Meghalaya</option>
+                <option value="Mizoram">Mizoram</option>
+                <option value="Nagaland">Nagaland</option>
+                <option value="Odisha">Odisha</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Sikkim">Sikkim</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Tripura">Tripura</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="Uttarakhand">Uttarakhand</option>
+                <option value="West Bengal">West Bengal</option>
+            </select>
+        
+            <select>
+                <option value="">Preferred Location for Work</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                <option value="Assam">Assam</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Chhattisgarh">Chhattisgarh</option>
+                <option value="Goa">Goa</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Haryana">Haryana</option>
+                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                <option value="Jharkhand">Jharkhand</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Manipur">Manipur</option>
+                <option value="Meghalaya">Meghalaya</option>
+                <option value="Mizoram">Mizoram</option>
+                <option value="Nagaland">Nagaland</option>
+                <option value="Odisha">Odisha</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Sikkim">Sikkim</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Tripura">Tripura</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="Uttarakhand">Uttarakhand</option>
+                <option value="West Bengal">West Bengal</option>
+            </select>
+        </div>
+
+        <!-- Internship Experience Details -->
+        <div id="internshipDetails" style="display:none;">
+            <input type="text" placeholder="Company Name">
+            <input type="text" placeholder="Internship Duration">
+            <input type="text" placeholder="Company Address">
+            <input type="text" placeholder="Skills">
+            <select>
+                
+                    <option value="">Preferred Location for Work</option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                    <option value="Assam">Assam</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                    <option value="Jharkhand">Jharkhand</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Manipur">Manipur</option>
+                    <option value="Meghalaya">Meghalaya</option>
+                    <option value="Mizoram">Mizoram</option>
+                    <option value="Nagaland">Nagaland</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Sikkim">Sikkim</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Tripura">Tripura</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Uttarakhand">Uttarakhand</option>
+                    <option value="West Bengal">West Bengal</option>
+                </select>
+            </div>
+            </select>
+        </div>
+
+       
+        <!-- Experienced Details -->
+<div id="experiencedDetails" style="display:none;">
+    <input type="text" placeholder="Current Company">
+    <input type="text" placeholder="Notice Period">
+    <input type="text" placeholder="Company Location">
+    <input type="text" placeholder="Total Experience">
+    <select>
+        <option value="">Preferred Job Location</option>
+        <option value="Andhra Pradesh">Andhra Pradesh</option>
+        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+        <option value="Assam">Assam</option>
+        <option value="Bihar">Bihar</option>
+        <option value="Chhattisgarh">Chhattisgarh</option>
+        <option value="Goa">Goa</option>
+        <option value="Gujarat">Gujarat</option>
+        <option value="Haryana">Haryana</option>
+        <option value="Himachal Pradesh">Himachal Pradesh</option>
+        <option value="Jharkhand">Jharkhand</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="Kerala">Kerala</option>
+        <option value="Madhya Pradesh">Madhya Pradesh</option>
+        <option value="Maharashtra">Maharashtra</option>
+        <option value="Manipur">Manipur</option>
+        <option value="Meghalaya">Meghalaya</option>
+        <option value="Mizoram">Mizoram</option>
+        <option value="Nagaland">Nagaland</option>
+        <option value="Odisha">Odisha</option>
+        <option value="Punjab">Punjab</option>
+        <option value="Rajasthan">Rajasthan</option>
+        <option value="Sikkim">Sikkim</option>
+        <option value="Tamil Nadu">Tamil Nadu</option>
+        <option value="Telangana">Telangana</option>
+        <option value="Tripura">Tripura</option>
+        <option value="Uttar Pradesh">Uttar Pradesh</option>
+        <option value="Uttarakhand">Uttarakhand</option>
+        <option value="West Bengal">West Bengal</option>
+    </select>
+  </div>
+  
+
+        <button class="save-btn" onclick="saveData()">Save</button>
+    </div>
+
+    <script>
+        function showDetails(selectedCategory) {
+            document.getElementById('fresherDetails').style.display = 'none';
+            document.getElementById('internshipDetails').style.display = 'none';
+            document.getElementById('experiencedDetails').style.display = 'none';
+            
+            document.getElementById(selectedCategory).style.display = 'block';
+        }
+
+        function saveData() {
+            let inputs = document.querySelectorAll('input:not([type="file"])');
+            for (let input of inputs) {
+                if (input.value.trim() === "") {
+                    alert("Please fill all fields before saving.");
+                    return;
+                }
+            }
+            alert("Successfully saved");
+        }
+    </script>
+</body>
+</html>
