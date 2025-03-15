@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Referral Request</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+
+        h2 {
+            background: linear-gradient(to right, #6d5dfc, #ba68c8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: linear-gradient(to right, #6d5dfc, #ba68c8);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            flex: 1 1 150px;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .filters {
+            display: none;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px auto;
+            max-width: 900px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1 1 200px;
+        }
+
+        select {
+            padding: 8px;
+            width: 100%;
+            max-width: 200px;
+            background: #222;
+            color: white;
+            border: 1px solid #6d5dfc;
+            border-radius: 5px;
+        }
+
+        .filter-button {
+            margin-top: 10px;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .job-list {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .job-box {
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .job-box h4 {
+            margin: 0 0 10px;
+            color: #6d5dfc;
+            font-size: 1.2rem;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .description-btn, .referral-btn {
+            padding: 8px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .description-btn {
+            background: #444;
+            color: white;
+        }
+
+        .referral-btn {
+            background: #6d5dfc;
+            color: white;
+        }
+
+        #confirmationMessage {
+            display: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (min-width: 600px) {
+            .buttons {
+                flex-direction: row;
+            }
+
+            .description-btn, .referral-btn {
+                width: auto;
+            }
+        }
+
+        @media (min-width: 768px) {
+            body {
+                padding: 40px;
+            }
+
+            h2 {
+                font-size: 2.5rem;
+            }
+
+            .options {
+                gap: 20px;
+            }
+
+            button {
+                flex: 0 1 auto;
+            }
+
+            .filter-group {
+                flex: 0 1 auto;
+            }
+
+            select {
+                width: 180px;
+            }
+
+            .filter-button {
+                width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="confirmationMessage">Your referral request has been sent successfully!</div>
+    <h2>Send a Referral Request</h2>
+    <div class="options">
+        <button onclick="showFilters('experienced')">Experienced</button>
+        <button onclick="showFilters('fresher')">Fresher</button>
+    </div>
+    <div id="filters" class="filters" style="display: none;">
+        <div id="expFilter" style="display: none;">
+            <label for="experience">Experience:</label>
+            <div class="filter-group">
+                <select id="experience">
+                    <option>Select Experience</option>
+                    <option>0-2 years</option>
+                    <option>3-5 years</option>
+                    <option>6+ years</option>
+                </select>
+            </div>
+        </div>
+        <div class="filter-group">
+            <label for="company">Company:</label>
+            <select id="company">
+                <option>Select Company</option>
+                <option>Google</option>
+                <option>Microsoft</option>
+                <option>Amazon</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="technology">Technology:</label>
+            <select id="technology">
+                <option>Select Technology</option>
+                <option>Python</option>
+                <option>React</option>
+                <option>Java</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="postedWeek">Posted Week:</label>
+            <select id="postedWeek">
+                <option>Select Week</option>
+                <option>Last 7 days</option>
+                <option>Last 14 days</option>
+            </select>
+        </div>
+        <button class="filter-button" onclick="filterJobs()">Find Jobs</button>
+    </div>
+    <div id="jobList" class="job-list">
+        <h3>Available Jobs</h3>
+        <div id="jobsContainer"></div>
+    </div>
+    <script>
+        let selectedCategory = '';
+
+        function showFilters(category) {
+            selectedCategory = category;
+            document.getElementById('filters').style.display = 'flex';
+            document.getElementById('expFilter').style.display = category === 'experienced' ? 'block' : 'none';
+            document.getElementById('jobList').style.display = 'none';
+            document.getElementById('jobsContainer').innerHTML = '';
+        }
+
+        function filterJobs() {
+            let company = document.getElementById('company').value;
+            let technology = document.getElementById('technology').value;
+            let postedWeek = document.getElementById('postedWeek').value;
+            let experience = selectedCategory === 'experienced' ? document.getElementById('experience').value : null;
+
+            let jobsContainer = document.getElementById('jobsContainer');
+            jobsContainer.innerHTML = '';
+
+            if (company === "Select Company" || technology === "Select Technology" || postedWeek === "Select Week" || (experience && experience === "Select Experience")) {
+                alert("Please select all filters.");
+                return;
+            }
+
+            let jobs = [
+                { title: "Software Engineer", company: company, tech: technology, posted: postedWeek, experience: experience || "Fresher" },
+                { title: "Backend Developer", company: company, tech: technology, posted: postedWeek, experience: experience || "Fresher" }
+            ];
+
+            jobs.forEach(job => {
+                let jobBox = document.createElement('div');
+                jobBox.classList.add('job-box');
+                jobBox.innerHTML = `
+                    <h4>${job.title} - ${job.company}</h4>
+                    <p><strong>Technology:</strong> ${job.tech}</p>
+                    <p><strong>Experience:</strong> ${job.experience}</p>
+                    <p><strong>Posted:</strong> ${job.posted}</p>
+                    <div class='buttons'>
+                        <button class='description-btn'>Job Description</button>
+                        <button class='referral-btn'>Send Referral Request</button>
+                    </div>
+                `;
+                jobsContainer.appendChild(jobBox);
+            });
+
+            document.querySelectorAll('.referral-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    showConfirmationMessage();
+                });
+            });
+
+            document.getElementById('jobList').style.display = 'block';
+        }
+
+        function showConfirmationMessage() {
+            const messageDiv = document.getElementById('confirmationMessage');
+            messageDiv.style.display = 'block';
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
