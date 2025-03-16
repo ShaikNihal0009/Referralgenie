@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Seeker Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* General Page Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 60px; /* Initially Collapsed */
+            height: 100vh;
+            background: linear-gradient(to bottom, #6d5dfc, #ba68c8);
+            color: white;
+            padding: 20px 10px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            transition: width 0.3s ease-in-out;
+            overflow: hidden;
+        }
+
+        .sidebar.expanded {
+            width: 220px;
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            display: block;
+            width: 100%;
+            text-align: left;
+        }
+
+        .sidebar .menu-items {
+            display: none;
+        }
+
+        .sidebar.expanded .menu-items {
+            display: block;
+        }
+
+        .menu-items p {
+            cursor: pointer;
+            padding: 10px;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .menu-items p:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Content Wrapper */
+        .content-wrapper {
+            flex-grow: 1;
+            padding: 40px;
+            margin-left: 70px;
+            transition: margin-left 0.3s ease-in-out;
+            width: 100%;
+        }
+
+        .content-wrapper.expanded {
+            margin-left: 230px;
+        }
+
+        /* Container Box */
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: #111;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            margin: auto;
+            display: none; /* Hide all sections by default */
+        }
+
+        .container.active {
+            display: block; /* Show only active section */
+        }
+
+        /* Profile Fields */
+        .custom-dropdown, .profile-input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: #222;
+            color: white;
+            font-size: 16px;
+            border: 1px solid #444;
+        }
+
+        .profile-input[disabled] {
+            background: #333;
+            color: #777;
+        }
+
+        /* Edit Button */
+        .edit-btn {
+            background: #ff6b6b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 20px;
+            transition: 0.3s;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .edit-btn:hover {
+            background: #ff4444;
+        }
+
+        /* Hide Job Category Sections Initially */
+        .details-section {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <div class="menu-items">
+        <h2>Dashboard</h2>
+        <p onclick="showSection('dashboard-section')">Dashboard</p>
+        <p onclick="showSection('profile-section')">Profile</p>
+        <p onclick="showSection('applications-section')">Application Status</p>
+        <p onclick="showSection('contact-section')">Contact Support</p>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="content-wrapper" id="content-wrapper">
+    <!-- Dashboard Section -->
+    <div class="container active" id="dashboard-section">
+        <h2>Dashboard Overview</h2>
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <!-- Profile Section -->
+    <div class="container" id="profile-section">
+        <h2>John Doe</h2>
+        <button class="edit-btn" onclick="toggleEdit()">Edit</button>
+        <p><strong>Email:</strong> <input type="text" id="email" value="johndoe@email.com" class="profile-input" disabled></p>
+        <p><strong>Phone:</strong> <input type="text" id="phone" value="(91) 9045697890" class="profile-input" disabled></p>
+
+        <p><strong>Job Category:</strong></p>
+        <select id="jobCategory" class="custom-dropdown" onchange="toggleJobFields()">
+            <option value="">Select Category</option>
+            <option value="fresher">Fresher</option>
+            <option value="experienced">Experienced</option>
+        </select>
+
+        <!-- Fresher Section -->
+        <div id="fresher-section" class="details-section">
+            <p><strong>College Name:</strong> <input type="text" class="profile-input" disabled></p>
+            <p><strong>State:</strong>
+                <select class="custom-dropdown" disabled>
+                    <option value="">Select State</option>
+                    <option value="Texas">Texas</option>
+                    <option value="California">California</option>
+                </select>
+            </p>
+        </div>
+
+        <!-- Experienced Section -->
+        <div id="experienced-section" class="details-section">
+            <p><strong>Company Name:</strong> <input type="text" class="profile-input" disabled></p>
+            <p><strong>Total Experience:</strong> <input type="text" class="profile-input" disabled></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleMenu() {
+        const sidebar = document.getElementById("sidebar");
+        const content = document.getElementById("content-wrapper");
+        sidebar.classList.toggle("expanded");
+        content.classList.toggle("expanded");
+    }
+
+    function showSection(sectionId) {
+        document.querySelectorAll('.container').forEach(section => {
+            section.classList.remove('active');
+        });
+        document.getElementById(sectionId).classList.add('active');
+
+        // Auto-close sidebar
+        document.getElementById("sidebar").classList.remove("expanded");
+        document.getElementById("content-wrapper").classList.remove("expanded");
+    }
+
+    function toggleEdit() {
+        document.querySelectorAll('.profile-input').forEach(input => {
+            input.disabled = !input.disabled;
+        });
+    }
+
+    function toggleJobFields() {
+        let category = document.getElementById("jobCategory").value;
+        document.getElementById("fresher-section").style.display = category === "fresher" ? "block" : "none";
+        document.getElementById("experienced-section").style.display = category === "experienced" ? "block" : "none";
+    }
+
+    // Initialize Dashboard Chart
+    new Chart(document.getElementById("myChart"), {
+        type: "bar",
+        data: {
+            labels: ["Jan", "Feb", "Mar"],
+            datasets: [{ data: [30, 50, 70], backgroundColor: ["red", "blue", "green"] }]
+        }
+    });
+</script>
+
+</body>
+</html>
