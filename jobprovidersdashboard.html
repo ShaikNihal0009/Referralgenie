@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Provider Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* General Page Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 60px; 
+            height: 100vh;
+            background: linear-gradient(to bottom, #6d5dfc, #ba68c8);
+            color: white;
+            padding: 20px 10px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            transition: width 0.3s ease-in-out;
+            overflow: hidden;
+        }
+
+        .sidebar.expanded {
+            width: 220px;
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            display: block;
+            width: 100%;
+            text-align: left;
+        }
+
+        .sidebar .menu-items {
+            display: none;
+        }
+
+        .sidebar.expanded .menu-items {
+            display: block;
+        }
+
+        .menu-items p {
+            cursor: pointer;
+            padding: 10px;
+            transition: 0.3s;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .menu-items p:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Content Wrapper */
+        .content-wrapper {
+            flex-grow: 1;
+            padding: 40px;
+            margin-left: 70px;
+            transition: margin-left 0.3s ease-in-out;
+            width: 100%;
+        }
+
+        .content-wrapper.expanded {
+            margin-left: 230px;
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: #111;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            margin: auto;
+            display: none;
+        }
+
+        .container.active {
+            display: block;
+        }
+
+        /* Form Inputs */
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: #222;
+            color: white;
+            font-size: 16px;
+            border: 1px solid #444;
+        }
+
+        /* Buttons */
+        .action-btn {
+            background: linear-gradient(to right, #6d5dfc, #ba68c8);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 30px;
+            transition: 0.3s;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .action-btn:hover {
+            background: linear-gradient(to right, #5a4afc, #9b5bbb);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 50px;
+            }
+
+            .sidebar.expanded {
+                width: 180px;
+            }
+
+            .content-wrapper {
+                margin-left: 55px;
+            }
+
+            .content-wrapper.expanded {
+                margin-left: 190px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <div class="menu-items">
+        <h2>Provider Dashboard</h2>
+        <p onclick="showSection('dashboard-section')">Dashboard</p>
+        <p onclick="showSection('profile-section')">Profile</p>
+        <p onclick="showSection('post-job-section')">Post a Job</p>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="content-wrapper" id="content-wrapper">
+
+    <!-- Dashboard Section -->
+    <div class="container active" id="dashboard-section">
+        <h2>Referrals Overview</h2>
+        <canvas id="barChart"></canvas>
+        <canvas id="pieChart"></canvas>
+    </div>
+
+    <!-- Profile Section -->
+    <div class="container" id="profile-section">
+        <h2>Profile</h2>
+        <p><strong>Name:</strong> <input type="text" class="input-field" id="name" value="John Doe"></p>
+        <p><strong>Company Email:</strong> <input type="email" class="input-field" id="companyEmail" value="john@company.com"></p>
+        <p><strong>Personal Email:</strong> <input type="email" class="input-field" id="personalEmail" value="john.doe@email.com"></p>
+        <p><strong>Phone:</strong> <input type="text" class="input-field" id="phone" value="(91) 9045697890"></p>
+        <p><strong>Total Experience:</strong> <input type="text" class="input-field" id="experience" value="8 Years"></p>
+    </div>
+
+    <!-- Post a Job Section -->
+    <div class="container" id="post-job-section">
+        <h2>Post a Job</h2>
+        <p><strong>Company Name:</strong> <input type="text" class="input-field"></p>
+        <p><strong>Role:</strong> <input type="text" class="input-field"></p>
+        <p><strong>Job Description:</strong> <textarea class="input-field"></textarea></p>
+        <p><strong>Official Job Post Link:</strong> <input type="url" class="input-field"></p>
+        <button class="action-btn">Post Job</button>
+    </div>
+
+</div>
+
+<script>
+    function toggleMenu() {
+        const sidebar = document.getElementById("sidebar");
+        const content = document.getElementById("content-wrapper");
+        sidebar.classList.toggle("expanded");
+        content.classList.toggle("expanded");
+    }
+
+    function showSection(sectionId) {
+        document.querySelectorAll('.container').forEach(section => {
+            section.classList.remove('active');
+        });
+
+        document.getElementById(sectionId).classList.add('active');
+    }
+
+    window.onload = function() {
+        function setChartSize() {
+            const screenWidth = window.innerWidth;
+            let barWidth = screenWidth > 768 ? 600 : 300;
+            let barHeight = screenWidth > 768 ? 400 : 200;
+
+            const barCanvas = document.getElementById("barChart");
+            const pieCanvas = document.getElementById("pieChart");
+
+            barCanvas.width = barWidth;
+            barCanvas.height = barHeight;
+            pieCanvas.width = barWidth;
+            pieCanvas.height = barHeight;
+
+            new Chart(barCanvas.getContext("2d"), {
+                type: "bar",
+                data: { labels: ["Jan", "Feb", "Mar"], datasets: [{ label: "Referrals", data: [5, 10, 15], backgroundColor: "rgba(75, 192, 192, 0.6)"}] },
+            });
+
+            new Chart(pieCanvas.getContext("2d"), {
+                type: "pie",
+                data: { labels: ["In Progress", "Rejected", "Completed"], datasets: [{ data: [40, 30, 30], backgroundColor: ["#ff9800", "#f44336", "#4caf50"] }] },
+            });
+        }
+
+        setChartSize();
+        window.addEventListener("resize", setChartSize);
+    };
+</script>
+
+</body>
+</html>
