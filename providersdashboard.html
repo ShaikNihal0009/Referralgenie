@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Provider Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            width: 60px;
+            height: 100vh;
+            background: linear-gradient(to bottom, #6d5dfc, #ba68c8);
+            color: white;
+            padding: 20px 10px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            transition: width 0.3s ease-in-out;
+            overflow: hidden;
+        }
+
+        .sidebar.expanded {
+            width: 220px;
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            display: block;
+            width: 100%;
+            text-align: left;
+        }
+
+        .sidebar .menu-items {
+            display: none;
+        }
+
+        .sidebar.expanded .menu-items {
+            display: block;
+        }
+
+        .menu-items p {
+            cursor: pointer;
+            padding: 10px;
+            transition: 0.3s;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .menu-items p:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .content-wrapper {
+            flex-grow: 1;
+            padding: 40px;
+            margin-left: 70px;
+            transition: margin-left 0.3s ease-in-out;
+            width: 100%;
+        }
+
+        .content-wrapper.expanded {
+            margin-left: 230px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: #111;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            margin: auto;
+            display: none;
+        }
+
+        .container.active {
+            display: block;
+        }
+
+        .custom-input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: #222;
+            color: white;
+            font-size: 16px;
+            border: 1px solid #444;
+        }
+
+        .save-btn, .post-btn {
+            background: linear-gradient(to right, #6d5dfc, #ba68c8);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 30px;
+            transition: 0.3s;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .save-btn:hover, .post-btn:hover {
+            background: #ff4444;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 50px;
+            }
+
+            .sidebar.expanded {
+                width: 180px;
+            }
+
+            .content-wrapper {
+                margin-left: 55px;
+            }
+
+            .content-wrapper.expanded {
+                margin-left: 190px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar" id="sidebar">
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <div class="menu-items">
+        <h2>Dashboard</h2>
+        <p onclick="showSection('dashboard-section')">Dashboard</p>
+        <p onclick="showSection('profile-section')">Profile</p>
+        <p onclick="showSection('post-job-section')">Post a Job</p>
+    </div>
+</div>
+
+<div class="content-wrapper" id="content-wrapper">
+    <div class="container active" id="dashboard-section">
+        <h2>Referrals Overview</h2>
+        <canvas id="barChart"></canvas>
+        <canvas id="pieChart"></canvas>
+    </div>
+
+    <div class="container" id="profile-section">
+        <h2>Profile</h2>
+        <p><strong>Name:</strong> <input type="text" class="custom-input" value="John Doe"></p>
+        <p><strong>Company Email:</strong> <input type="text" class="custom-input" value="company@email.com"></p>
+        <p><strong>Personal Email:</strong> <input type="text" class="custom-input" value="personal@email.com"></p>
+        <p><strong>Contact Number:</strong> <input type="text" class="custom-input" value="(91) 9045697890"></p>
+        <p><strong>Total Years of Experience:</strong> <input type="text" class="custom-input" value="5"></p>
+        <button class="save-btn">Save</button>
+    </div>
+
+    <div class="container" id="post-job-section">
+        <h2>Post a Job</h2>
+        <p><strong>Company Name:</strong> <input type="text" class="custom-input"></p>
+        <p><strong>Role:</strong> <input type="text" class="custom-input"></p>
+        <p><strong>Job Description:</strong> <textarea class="custom-input"></textarea></p>
+        <p><strong>Official Link to Job Post:</strong> <input type="text" class="custom-input"></p>
+        <button class="post-btn">Post Job</button>
+    </div>
+</div>
+
+<script>
+    function toggleMenu() {
+        const sidebar = document.getElementById("sidebar");
+        const content = document.getElementById("content-wrapper");
+        sidebar.classList.toggle("expanded");
+        content.classList.toggle("expanded");
+    }
+
+    function showSection(sectionId) {
+        document.querySelectorAll('.container').forEach(section => {
+            section.classList.remove('active');
+        });
+
+        document.getElementById(sectionId).classList.add('active');
+
+        document.getElementById("sidebar").classList.remove("expanded");
+        document.getElementById("content-wrapper").classList.remove("expanded");
+    }
+
+    window.onload = function() {
+        function setChartSize() {
+            let sizes = { large: [600, 400], medium: [400, 300], small: [300, 200] };
+            let size = window.innerWidth > 1200 ? sizes.large : window.innerWidth > 768 ? sizes.medium : sizes.small;
+
+            let [barW, barH] = size, [pieW, pieH] = size;
+
+            document.getElementById("barChart").width = barW;
+            document.getElementById("barChart").height = barH;
+            document.getElementById("pieChart").width = pieW;
+            document.getElementById("pieChart").height = pieH;
+
+            new Chart(document.getElementById("barChart").getContext("2d"), {
+                type: "bar",
+                data: { labels: ["Jan", "Feb"], datasets: [{ label: "Referrals", data: [10, 20], backgroundColor: "rgba(75, 192, 192, 0.6)" }] }
+            });
+
+            new Chart(document.getElementById("pieChart").getContext("2d"), {
+                type: "pie",
+                data: { labels: ["In Progress", "Rejected", "Completed"], datasets: [{ data: [40, 30, 30], backgroundColor: ["#4caf50", "#f44336", "#ff9800"] }] }
+            });
+        }
+
+        setChartSize();
+        window.addEventListener("resize", setChartSize);
+    };
+</script>
+
+</body>
+</html>
