@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Company Logos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(to right, #6d5dfc, #ba68c8);
+        }
+
+        .content {
+            text-align: center;
+            width: 100%;
+        }
+
+        h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            animation: slide 30s linear infinite;
+        }
+
+        .logo-container img {
+            width: 80px;
+            height: auto;
+            margin: 0 40px; /* Increased gap between logos */
+        }
+
+        @keyframes slide {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .logo-container img {
+                width: 60px;
+                margin: 0 20px; /* Adjusted gap for smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .logo-container img {
+                width: 50px;
+                margin: 0 15px; /* Further adjusted gap for mobile screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Our Major Capabilities</h1>
+        <div class="logo-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg" alt="TCS">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/HCL_Technologies_logo.svg" alt="HCL">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg" alt="Accenture">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg" alt="Infosys">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Capgemini_201x_logo.svg" alt="Capgemini">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Ford_logo_flat.svg" alt="Ford">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/LTIMindtree_Logo.svg" alt="LTI">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/MathCo_Logo.png" alt="MathCo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/Unisys_logo_2022.svg" alt="Unisys">
+        </div>
+    </div>
+</body>
+</html>
