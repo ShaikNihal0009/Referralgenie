@@ -49,6 +49,12 @@ nav ul li a {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.hero h3 {
+  font-size: 30px;
+  background: linear-gradient(to right, #6d5dfc, #ba68c8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .hee {
   color: linear-gradient(to right, #6d5dfc, #ba68c8);
   text-decoration-color:linear-gradient(to right, #6d5dfc, #ba68c8); 
